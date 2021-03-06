@@ -1,7 +1,0 @@
-dis-tile {
-  background: #CCC;
-}
-
-dis-tile[focus] {
-  outline: 3px solid white;
-}

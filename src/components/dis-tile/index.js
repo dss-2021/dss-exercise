@@ -1,8 +1,16 @@
 import DisFocusable from '../dis-focusable';
-import './styles.css'; // TODO: should probably be a template
+import template from './template';
 
 export default class DisTile extends DisFocusable {
+  constructor() {
+    super();
+
+    this.shadow = this.attachShadow({ mode: 'closed' });
+    this.shadow.innerHTML = template;
+  }
+
   connectedCallback() {
+    this.shadow.querySelector('::part(background)').src = this.background;
   }
 
   disconnectedCallback() {
