@@ -1,3 +1,4 @@
+import { logError } from  '../../libs/logger';
 import DisSpinner from '../dis-spinner';
 import './styles.css';
 
@@ -9,10 +10,7 @@ export default class DisScreen extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({
-      delegatesFocus: true,
-      mode: 'open',
-    });
+    const shadow = this.attachShadow({ mode: 'closed' });
 
     this.slotEl = document.createElement('slot');
     shadow.appendChild(this.slotEl);
@@ -25,10 +23,12 @@ export default class DisScreen extends HTMLElement {
 
   connectedCallback() {
     this.slotEl.addEventListener('slotchange', this.onSlotChange);
+    this.loadScreen().catch(logError);
   }
 
   disconnectedCallback() {
     this.slotEl.removeEventListener('slotchange', this.onSlotChange);
+    this.unloadScreen().catch(logError);
   }
 
   onSlotChange() {
@@ -38,6 +38,22 @@ export default class DisScreen extends HTMLElement {
     } else {
       this.spinnerEl.show();
     }
+  }
+
+  /**
+   * Asynchronous method to load and populate screen
+   * (to be overridden by implementation prototype)
+   */
+  async loadScreen() {
+    // ...
+  }
+
+  /**
+   * Asynchronous method to unload a screen
+   * (to be overridden by implementation prototype)
+   */
+  async unloadScreen() {
+    // ...
   }
 }
 
