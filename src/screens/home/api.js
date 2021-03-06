@@ -2,7 +2,8 @@
  * API methods related to the home screen.
  */
 
-const API_ROOT = 'https://cd-static.bamgrid.com/dp-117731241344';
+// const API_ROOT = 'https://cd-static.bamgrid.com/dp-117731241344';
+const API_ROOT = 'http://localhost:8080';
 
 function getSourceEntity(item) {
   if (item?.programId) return 'program';
@@ -18,10 +19,28 @@ function normalizeShelfItem(item) {
   if (!sourceEntity) return null;
 
   return {
-    title: item?.text?.title?.full?.[sourceEntity]?.default?.content,
+    title: (
+      item?.text?.title?.full?.[sourceEntity]?.default?.content
+      || null
+    ),
 
-    // TODO: other aspect ratios?
-    tile: item?.image?.tile?.['1.78']?.[sourceEntity]?.default?.url,
+    tile: (
+      item?.image?.tile?.['1.78']?.[sourceEntity]?.default?.url
+      || item?.image?.tile?.['1.78']?.default?.default?.url
+      || null
+    ),
+
+    heroBackground: (
+      item?.image?.background?.['1.78']?.[sourceEntity]?.default?.url
+      || null
+    ),
+
+    heroVideo: (
+      (item?.videoArt || [])
+        .find(art => art?.purpose === 'full_bleed')
+        ?.mediaMetadata?.urls?.[0]?.url
+      || null
+    ),
   };
 }
 
