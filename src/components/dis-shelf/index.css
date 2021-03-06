@@ -1,0 +1,38 @@
+dis-shelf {
+  --item-aspect: 1.78;
+  --item-gutter: 3vw;
+
+  /* These values should only be set/updated through JavaScript */
+  --item-count: 0;
+  --item-shown: 5;
+  --cursor: 0;
+
+  /* Calculated values */
+  --item-width: calc(100% / var(--item-shown));
+
+  display: block;
+  margin: 0 auto;
+  max-width: 84%;
+}
+
+dis-shelf::part(placeholder),
+dis-shelf dis-tile {
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(1 / var(--item-aspect) * 100%);
+}
+
+dis-shelf::part(track) {
+  display: grid;
+  grid-template-columns: repeat(
+    calc(var(--item-count) + 1),
+    calc(var(--item-width) - var(--item-gutter))
+  );
+  grid-gap: var(--item-gutter);
+  margin-right: calc(0px - var(--item-gutter));
+
+  transition: transform 0.2s ease-in-out;
+  transform: translateX(calc(
+    0px - (var(--cursor) + 1) * var(--item-width)
+  ));
+}
