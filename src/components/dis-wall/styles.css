@@ -1,0 +1,7 @@
+dis-wall {
+  overflow: hidden;
+}
+
+dis-wall::part(track) {
+  transition: transform 0.4s ease-out;
+}
