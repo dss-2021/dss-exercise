@@ -1,6 +1,6 @@
 import * as control from  '../../libs/control';
 import * as focus from  '../../libs/focus';
-import './index.css';
+import './styles.css'; // TODO: should be a template
 
 /**
  * Horizontal shelf of focusable items.
@@ -23,7 +23,6 @@ export default class DisShelf extends HTMLElement {
 
     this.titleEl = document.createElement('h2');
     this.titleEl.setAttribute('part', 'title');
-    this.titleEl.innerText = 'Shelf';
     shadow.appendChild(this.titleEl);
 
     this.trackEl = document.createElement('div');
@@ -38,7 +37,21 @@ export default class DisShelf extends HTMLElement {
     this.trackEl.appendChild(this.slotEl);
   }
 
+  attributeChangedCallback(name, oldValue, newValue) {
+    switch (name) {
+      case 'title':
+        this.titleEl.innerText = newValue;
+        break;
+
+      default:
+        // Unrecognized attribute
+        break;
+    }
+  }
+
   connectedCallback() {
+    this.titleEl.innerText = this.getAttribute('title') || '';
+
     this.addEventListener(control.Events.Input, this.onInput);
     this.addEventListener(focus.Events.Focus, this.onFocus);
     this.slotEl.addEventListener('slotchange', this.onSlotChange);

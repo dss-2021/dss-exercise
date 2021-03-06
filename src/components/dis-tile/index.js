@@ -1,5 +1,5 @@
 import DisFocusable from '../dis-focusable';
-import './index.css';
+import './styles.css'; // TODO: should probably be a template
 
 export default class DisTile extends DisFocusable {
   connectedCallback() {
