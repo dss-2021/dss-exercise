@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "ignorePatterns": [
+    "/*.js"
+  ],
+  "overrides": [
+    {
+      files: "*.test.js",
+      "env": { "jest": true }
+    }
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

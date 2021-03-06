@@ -1,0 +1,23 @@
+{
+  "name": "dss-exercise",
+  "description": "DSS take-home exercise.",
+  "author": "DSS",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "pretest": "eslint src --ext .js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dss-2021/dss-exercise.git"
+  },
+  "devDependencies": {
+    "eslint": "^7",
+    "jest": "^26",
+    "snowpack": "^3"
+  }
+}
