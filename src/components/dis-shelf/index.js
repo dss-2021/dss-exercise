@@ -37,6 +37,10 @@ export default class DisShelf extends HTMLElement {
     this.trackEl.appendChild(this.slotEl);
   }
 
+  static get observedAttributes() {
+    return ['title'];
+  }
+
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case 'title':

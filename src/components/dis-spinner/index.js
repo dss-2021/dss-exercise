@@ -1,5 +1,8 @@
 import template from './template';
 
+/**
+ * "Loading" spinner
+ */
 export default class DisSpinner extends HTMLElement {
   constructor() {
     super();

@@ -1,9 +1,20 @@
+/**
+ * Methods and events related to the currently focused element.
+ */
+
 import { Inputs, makeInputEvent } from  './control';
 
+/**
+ * Enum: focus-related events.
+ */
 export const Events = {
   Focus: 'focus',
 };
 
+// The element that currently has focus
+let focus;
+
+// Maps keyboard events to controller inputs for the keyup listener
 const EventKeyMap = {
   ArrowUp: Inputs.Up,
   ArrowDown: Inputs.Down,
@@ -14,8 +25,9 @@ const EventKeyMap = {
   Escape: Inputs.Back,
 };
 
-let focus;
-
+// Listen for keyboard input and translate to an input event
+// originating from the currently focused element
+// TODO: should this be in the control lib?
 document.body.addEventListener('keyup', (event) => {
   const input = EventKeyMap[event.key];
   if (focus && input) {
@@ -23,14 +35,18 @@ document.body.addEventListener('keyup', (event) => {
   }
 });
 
+/**
+ * Returns the element that currently has focus.
+ */
 export function getFocus() {
   return focus;
 }
 
+/**
+ * Moves focus to a new element.
+ */
 export function setFocus(newFocus) {
-  if (focus) {
-    focus.removeAttribute('focus');
-  }
+  focus?.removeAttribute('focus');
 
   focus = newFocus;
   focus.setAttribute('focus', '');

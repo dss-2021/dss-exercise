@@ -1,5 +1,8 @@
 import template from './template';
 
+/**
+ * "Hero" component
+ */
 export default class DisHero extends HTMLElement {
   constructor() {
     super();

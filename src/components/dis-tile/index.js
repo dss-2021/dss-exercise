@@ -1,6 +1,9 @@
 import DisFocusable from '../dis-focusable';
 import template from './template';
 
+/**
+ * Tile with background art that expands when focused.
+ */
 export default class DisTile extends DisFocusable {
   constructor() {
     super();
@@ -10,10 +13,8 @@ export default class DisTile extends DisFocusable {
   }
 
   connectedCallback() {
-    this.shadow.querySelector('::part(background)').src = this.background;
-  }
-
-  disconnectedCallback() {
+    const bg = this.getAttribute('background');
+    if (bg) this.shadow.querySelector('::part(background)').src = bg;
   }
 }
 

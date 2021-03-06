@@ -3,6 +3,7 @@ import DisScreen from '../../components/dis-screen';
 import DisShelf from '../../components/dis-shelf';
 import DisTile from '../../components/dis-tile';
 import DisWall from '../../components/dis-wall';
+import { logError } from '../../libs/logger';
 
 import * as api from './api';
 import './styles.css';
@@ -43,7 +44,7 @@ async function init() {
     shelf.setAttribute('title', shelfData.title);
     shelfData.items.forEach((itemData) => {
       const tile = new DisTile();
-      tile.background = itemData.tile;
+      tile.setAttribute('background', itemData.tile || '');
       shelf.appendChild(tile);
     });
     wall.appendChild(shelf);
@@ -54,7 +55,4 @@ async function init() {
   screen.querySelector('dis-tile').focus();
 }
 
-init().catch(e => {
-  // TODO: improve this :)
-  console.warn('There was an error. :(', e);
-});
+init().catch(logError);
