@@ -21,7 +21,7 @@ export default class DisShelf extends HTMLElement {
       mode: 'open',
     });
 
-    this.titleEl = document.createElement('h2');
+    this.titleEl = document.createElement('div');
     this.titleEl.setAttribute('part', 'title');
     shadow.appendChild(this.titleEl);
 

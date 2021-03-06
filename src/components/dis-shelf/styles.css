@@ -11,7 +11,7 @@ dis-shelf {
   --item-width: calc(100% / var(--item-shown));
 
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 4vh;
   max-width: 84%;
 }
 
@@ -35,4 +35,9 @@ dis-shelf::part(track) {
   transform: translateX(calc(
     0px - (var(--cursor) + 1) * var(--item-width)
   ));
+}
+
+dis-shelf::part(title) {
+  line-height: 2.6;
+  font-size: 2.6vh;
 }
