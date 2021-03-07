@@ -3,6 +3,8 @@ DSS take-home exercise.
 
 See it live: https://dss-2021.github.io/
 
+**Note:** this implementation is targeted for the latest Firefox & Chrome. (Tested in Firefox 86 & Chrome 89.)
+
 ## Setup
 Setup instructions for local development. Node 14 (the current LTS version) is recommended.
 
