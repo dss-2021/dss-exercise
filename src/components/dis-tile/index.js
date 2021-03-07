@@ -10,11 +10,28 @@ export default class DisTile extends DisFocusable {
 
     this.shadow = this.attachShadow({ mode: 'closed' });
     this.shadow.innerHTML = template;
+
+    this.backgroundEl = this.shadow.querySelector('::part(background)');
+
+    this.onBackgroundError = this.onBackgroundError.bind(this);
   }
 
   connectedCallback() {
+    this.backgroundEl.addEventListener('error', this.onBackgroundError);
+
     const bg = this.getAttribute('background');
-    if (bg) this.shadow.querySelector('::part(background)').src = bg;
+    if (bg) this.backgroundEl.src = bg;
+  }
+
+  disconnectedCallback() {
+    this.backgroundEl.removeEventListener('error', this.onBackgroundError);
+  }
+
+  onBackgroundError() {
+    this.backgroundEl.style.display = 'none';
+
+    const title = this.getAttribute('title');
+    this.shadow.querySelector('::part(content)').innerText = title;
   }
 }
 

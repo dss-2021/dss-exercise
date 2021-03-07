@@ -29,11 +29,7 @@ export default class DisHomeScreen extends DisScreen {
     this.shelves.forEach((shelfData) => {
       const shelf = new DisShelf();
       shelf.setAttribute('title', shelfData.title);
-      shelfData.items.forEach((itemData) => {
-        const tile = new DisTile();
-        tile.setAttribute('background', itemData.tile || '');
-        shelf.appendChild(tile);
-      });
+      this.addShelfItems(shelf, shelfData.items);
       this.wall.appendChild(shelf);
     });
 
@@ -81,6 +77,7 @@ export default class DisHomeScreen extends DisScreen {
     for (let item of items) {
       const tile = new DisTile();
       tile.setAttribute('background', item.tile || '');
+      tile.setAttribute('title', item.title || '');
       shelfEl.appendChild(tile);
     }
   }

@@ -6,6 +6,12 @@ const template = `
     }
 
     ::part(content) {
+      background: rgba(100, 100, 100, 0.2);
+      display: flex;
+      align-items: center;
+      font-size: 2vh;
+      justify-content: center;
+
       width: 100%;
       height: 100%;
 
