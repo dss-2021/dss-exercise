@@ -29,9 +29,6 @@ function normalizeShelfItem(item) {
   const sourceEntity = getSourceEntity(item);
   if (!sourceEntity) return null;
 
-  const background = item?.image?.background?.['1.78']?.[sourceEntity]?.default;
-  const backgroundWidth = Math.min(background?.masterWidth || 1000, 1920);
-
   return {
     title: (
       item?.text?.title?.full?.[sourceEntity]?.default?.content
@@ -43,7 +40,7 @@ function normalizeShelfItem(item) {
       || null
     ),
     heroBackground: (
-      background?.url?.replace('width=500', `width=${backgroundWidth}`)
+      item?.image?.background?.['1.78']?.[sourceEntity]?.default?.url
       || null
     ),
     heroVideo: (
