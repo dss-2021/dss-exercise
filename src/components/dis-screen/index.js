@@ -1,6 +1,5 @@
 import { logError } from  '../../libs/logger';
 import DisSpinner from '../dis-spinner';
-import './styles.css';
 
 /**
  * An application screen (e.g. home screen, collection screen, etc.)
