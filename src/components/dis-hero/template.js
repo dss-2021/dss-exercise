@@ -3,6 +3,8 @@ const template = `
     part="background"
     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
   />
+  <div part="background-overlay"></div>
+
   <video
     part="video"
     autoplay

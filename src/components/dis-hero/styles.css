@@ -4,6 +4,7 @@ dis-hero {
 }
 
 dis-hero::part(background),
+dis-hero::part(background-overlay),
 dis-hero::part(video) {
   width: 100%;
   height: auto;
@@ -13,8 +14,14 @@ dis-hero::part(video) {
   left: 0
 }
 
-dis-hero::part(background) {
-  filter: blur(1vh);
+dis-hero::part(background-overlay) {
+  background-image:
+    linear-gradient(
+      transparent,
+      black
+    );
+  height: 0;
+  padding-bottom: 56.25%;
 }
 
 dis-hero::part(details) {
