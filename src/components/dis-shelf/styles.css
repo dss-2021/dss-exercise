@@ -3,12 +3,12 @@ dis-shelf {
   --item-gutter: 3vw;
 
   /* These values should only be set/updated through JavaScript */
-  --item-count: 0;
-  --item-shown: 5;
-  --cursor: 0;
+  --total-items: 0;
+  --window-items: 5;
+  --window-offset: 0;
 
   /* Calculated values */
-  --item-width: calc(100% / var(--item-shown));
+  --item-width: calc(100% / var(--window-items));
 
   display: block;
   margin: 0 auto 4vh;
@@ -25,7 +25,7 @@ dis-shelf dis-tile {
 dis-shelf::part(track) {
   display: grid;
   grid-template-columns: repeat(
-    calc(var(--item-count) + 1),
+    calc(var(--total-items) + 1),
     calc(var(--item-width) - var(--item-gutter))
   );
   grid-gap: var(--item-gutter);
@@ -33,7 +33,7 @@ dis-shelf::part(track) {
 
   transition: transform 0.2s ease-in-out;
   transform: translateX(calc(
-    0px - (var(--cursor) + 1) * var(--item-width)
+    0px - (var(--window-offset) + 1) * var(--item-width)
   ));
 }
 

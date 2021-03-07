@@ -10,8 +10,10 @@ export default class DisShelf extends HTMLElement {
   constructor() {
     super();
 
-    this.cursor = 0;
-    this.itemsShown = 5;
+    // The shelf has a "window" of visible & focusable items
+    // Note: these properties have public setters and getters
+    this._windowOffset = 0;
+    this._windowItems = 5;
 
     this.onFocus = this.onFocus.bind(this);
     this.onInput = this.onInput.bind(this);
@@ -30,14 +32,8 @@ export default class DisShelf extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    switch (name) {
-      case 'title':
-        this.titleEl.innerText = newValue;
-        break;
-
-      default:
-        // Unrecognized attribute
-        break;
+    if (name === 'title') {
+      this.titleEl.innerText = newValue;
     }
   }
 
@@ -58,13 +54,11 @@ export default class DisShelf extends HTMLElement {
   onFocus(event) {
     this.focusIndex = [...this.children].indexOf(event.target);
 
-    if (this.focusIndex > this.cursor + this.itemsShown - 1) {
-      this.cursor = this.focusIndex - this.itemsShown + 1;
-    } else if (this.focusIndex < this.cursor) {
-      this.cursor = this.focusIndex;
+    if (this.focusIndex > this.windowOffset + this.windowItems - 1) {
+      this.windowOffset = this.focusIndex - this.windowItems + 1;
+    } else if (this.focusIndex < this.windowOffset) {
+      this.windowOffset = this.focusIndex;
     }
-
-    this.style.setProperty('--cursor', this.cursor);
   }
 
   onInput(event) {
@@ -84,15 +78,33 @@ export default class DisShelf extends HTMLElement {
   }
 
   onSlotChange() {
-    this.style.setProperty('--item-count', this.children.length);
+    this.style.setProperty('--total-items', this.children.length);
   }
 
-  get visibleFocusIndex() {
-    return this.focusIndex - this.cursor;
+  get windowIndex() {
+    return this.focusIndex - this.windowOffset;
   }
 
-  set visibleFocusIndex(value) {
-    this.children[this.cursor + value].focus();
+  set windowIndex(value) {
+    this.children[this.windowOffset + value].focus();
+  }
+
+  get windowItems() {
+    return this._windowItems;
+  }
+
+  set windowItems(value) {
+    this._windowItems = value;
+    this.style.setProperty('--window-items', this._windowItems);
+  }
+
+  get windowOffset() {
+    return this._windowOffset;
+  }
+
+  set windowOffset(value) {
+    this._windowOffset = value;
+    this.style.setProperty('--window-offset', this._windowOffset);
   }
 }
 

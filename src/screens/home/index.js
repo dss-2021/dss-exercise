@@ -53,7 +53,6 @@ export default class DisHomeScreen extends DisScreen {
 
     // Find the shelves nearby that have not been loaded
     const nextShelves = this.shelves
-      .slice(0)
       .map((shelf = {}, index) => ({ ...shelf, index }))
       .slice(index, index + shelfOffset)
       .filter(shelf => (
@@ -62,17 +61,23 @@ export default class DisHomeScreen extends DisScreen {
         && shelf.items.length === 0
       ));
 
+    // Load each of the next shelves
     for (let shelf of nextShelves) {
       this.shelves[shelf.index].loading = true;
 
+      // Obtain data for this shelf from the API
       const shelfData = await api.fetchShelf(shelf.refId);
       this.shelves[shelf.index] = shelfData;
 
+      // Populate the shelf component with new tiles
       const shelfEl = this.wall.children[shelf.index];
       this.addShelfItems(shelfEl, shelfData?.items);
     }
   }
 
+  /**
+   * Add new tiles to the given shelf element based on item data.
+   */
   addShelfItems(shelfEl, items = []) {
     for (let item of items) {
       const tile = new DisTile();
@@ -82,6 +87,9 @@ export default class DisHomeScreen extends DisScreen {
     }
   }
 
+  /**
+   * Re-sets the hero area with a new hero based on the given details.
+   */
   setHero(itemData) {
     this.heroArea.innerHTML = '';
 
@@ -93,12 +101,18 @@ export default class DisHomeScreen extends DisScreen {
     this.heroArea.appendChild(hero);
   }
 
+  /**
+   * Fires whenever focus changes within the wall.
+   */
   onWallFocus(event) {
     const shelf = event.target.closest('dis-shelf');
     const shelfIndex = [...shelf.children].indexOf(event.target);
     const wallIndex = [...this.wall.children].indexOf(shelf);
+
+    // Load "ref" shelves that may soon enter the viewport
     this.loadShelvesNear(wallIndex).catch(logError);
 
+    // Update the "hero" to reflect details of the focused item
     const itemData = this.shelves?.[wallIndex]?.items?.[shelfIndex];
     this.setHero(itemData);
   }

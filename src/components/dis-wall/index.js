@@ -44,7 +44,7 @@ export default class DisWall extends HTMLElement {
           .pop();
         if (prev) {
           this.scrollToElement(prev);
-          prev.visibleFocusIndex = shelf.visibleFocusIndex;
+          prev.windowIndex = shelf.windowIndex;
         }
         break;
       }
@@ -58,7 +58,7 @@ export default class DisWall extends HTMLElement {
         ));
         if (next) {
           this.scrollToElement(next);
-          next.visibleFocusIndex = shelf.visibleFocusIndex;
+          next.windowIndex = shelf.windowIndex;
         }
         break;
       }
