@@ -1,0 +1,42 @@
+dis-hero {
+  background: black;
+  height: 100%;
+}
+
+dis-hero::part(background),
+dis-hero video {
+  width: 100%;
+  height: auto;
+
+  position: absolute;
+  top: 0;
+  left: 0
+}
+
+dis-hero::part(background) {
+  filter: blur(1vh);
+}
+
+dis-hero::part(details) {
+  background-image:
+    linear-gradient(
+      90deg,
+      black 10%,
+      transparent
+    );
+  color: white;
+  padding: 8vh 8vw;
+
+  width: 60%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+dis-hero::part(title) {
+  font-size: 5vh;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 black;
+}

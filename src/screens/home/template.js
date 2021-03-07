@@ -1,7 +1,6 @@
 import '../../components/dis-hero';
 import '../../components/dis-wall';
 
-// TODO: templates as HTML fragments
 const template = `
   <style>
     :host {

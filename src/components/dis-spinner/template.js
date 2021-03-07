@@ -1,4 +1,3 @@
-// TODO: templates as HTML fragments
 const template = `
   <style>
     @keyframes spin {

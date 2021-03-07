@@ -1,6 +1,6 @@
 import * as control from  '../../libs/control';
 import * as focus from  '../../libs/focus';
-import './styles.css'; // TODO: should be a template
+import './styles.css';
 
 /**
  * Horizontal shelf of focusable items.
