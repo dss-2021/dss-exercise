@@ -1,8 +1,8 @@
 /**
- * This module contains methods used to traverse the Home Screen API.
- * Although it's tempting to try modeling this API based on shape,
- * there's no known contract/documentation to support that, so it's
- * safest to interact with it transactionally and .
+ * This module contains methods to fetch & parse data from the server.
+ * Although it's tempting to try modeling the data API based on shape,
+ * there's no known contract/documentation to support that so it's
+ * safest to interact with it transactionally and normalize responses.
  */
 
 import { logError } from '../../libs/logger';
@@ -59,12 +59,21 @@ const normalizeShelfSet = (set) => ({
   title: set?.text?.title?.full?.set?.default?.content || '',
   items: (set?.items || []).map(normalizeShelfItem).filter(Boolean),
   refId: set?.refId || null,
-  refType: set?.refType || null,
 });
 
 /**
+ * Fetches "set" API data for the given ref ID and resolves
+ * with a normalized shelf.
+ */
+export async function fetchShelf(refId) {
+  const response = await fetch(`${API_ROOT}/sets/${refId}.json`);
+  const root = await response.json();
+  return normalizeShelfSet(Object.values(root?.data || {})?.[0]);
+}
+
+/**
  * Fetches API data for the home screen and resolves with an
- * array of normalized shelf items.
+ * array of normalized shelves.
  */
 // TODO: JSDoc to describe return value?
 export async function fetchHomeShelves() {
