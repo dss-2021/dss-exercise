@@ -1,5 +1,6 @@
 import { Events, Inputs } from  '../../libs/control';
-import './styles.css'; // TODO: should be a template
+import template from './template';
+import './styles.css';
 
 /**
  * Collection of vertically-stacked DisShelf components.
@@ -10,17 +11,10 @@ export default class DisWall extends HTMLElement {
 
     this.onInput = this.onInput.bind(this);
 
-    const shadow = this.attachShadow({
-      delegatesFocus: true,
-      mode: 'open',
-    });
+    const shadow = this.attachShadow({ mode: 'open' });
+    shadow.innerHTML = template;
 
-    this.trackEl = document.createElement('div');
-    this.trackEl.setAttribute('part', 'track');
-    shadow.appendChild(this.trackEl);
-
-    this.slotEl = document.createElement('slot');
-    this.trackEl.appendChild(this.slotEl);
+    this.trackEl = shadow.querySelector('[part=track]');
   }
 
   connectedCallback() {

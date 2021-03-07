@@ -2,7 +2,7 @@ import template from './template';
 import './styles.css';
 
 /**
- * "Hero" component
+ * "Hero" elements have a big title and bold background art.
  */
 export default class DisHero extends HTMLElement {
   constructor() {

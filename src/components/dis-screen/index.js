@@ -1,5 +1,5 @@
 import { logError } from  '../../libs/logger';
-import DisSpinner from '../dis-spinner';
+import template from './template';
 
 /**
  * An application screen (e.g. home screen, collection screen, etc.)
@@ -9,15 +9,13 @@ export default class DisScreen extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'closed' });
-
-    this.slotEl = document.createElement('slot');
-    shadow.appendChild(this.slotEl);
-
-    this.spinnerEl = new DisSpinner();
-    shadow.appendChild(this.spinnerEl);
-
     this.onSlotChange = this.onSlotChange.bind(this);
+
+    const shadow = this.attachShadow({ mode: 'closed' });
+    shadow.innerHTML = template;
+
+    this.slotEl = shadow.querySelector('slot');
+    this.spinnerEl = shadow.querySelector('dis-spinner');
   }
 
   connectedCallback() {

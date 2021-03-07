@@ -1,5 +1,6 @@
 import * as control from  '../../libs/control';
 import * as focus from  '../../libs/focus';
+import template from './template';
 import './styles.css';
 
 /**
@@ -16,25 +17,12 @@ export default class DisShelf extends HTMLElement {
     this.onInput = this.onInput.bind(this);
     this.onSlotChange = this.onSlotChange.bind(this);
 
-    const shadow = this.attachShadow({
-      delegatesFocus: true,
-      mode: 'open',
-    });
+    const shadow = this.attachShadow({ mode: 'open' });
+    shadow.innerHTML = template;
 
-    this.titleEl = document.createElement('div');
-    this.titleEl.setAttribute('part', 'title');
-    shadow.appendChild(this.titleEl);
-
-    this.trackEl = document.createElement('div');
-    this.trackEl.setAttribute('part', 'track');
-    shadow.appendChild(this.trackEl);
-
-    const placeholder = document.createElement('div');
-    placeholder.setAttribute('part', 'placeholder');
-    this.trackEl.appendChild(placeholder);
-
-    this.slotEl = document.createElement('slot');
-    this.trackEl.appendChild(this.slotEl);
+    this.titleEl = shadow.querySelector('[part=title]');
+    this.trackEl = shadow.querySelector('[part=track]');
+    this.slotEl = shadow.querySelector('slot');
   }
 
   static get observedAttributes() {

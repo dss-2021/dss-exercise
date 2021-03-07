@@ -9,14 +9,6 @@ const template = `
       overflow: hidden;
     }
 
-    ::part(heroArea) {
-      width: 100%;
-      height: 100%;
-
-      position: absolute;
-      top: 0;
-    }
-
     dis-wall {
       width: 100%;
       height: 50%;

@@ -4,7 +4,7 @@ dis-hero {
 }
 
 dis-hero::part(background),
-dis-hero video {
+dis-hero::part(video) {
   width: 100%;
   height: auto;
 
