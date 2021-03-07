@@ -29,11 +29,11 @@ it('should update the focusIndex according to the focused child', () => {
 });
 
 it('should maintain offset when focus reaches edge', () => {
-  tiles[shelf.itemsShown - 1].focus();
-  expect(shelf.cursor).toBe(0);
+  tiles[shelf.windowItems - 1].focus();
+  expect(shelf.windowOffset).toBe(0);
 });
 
 it('should move offset when focus passes edge', () => {
-  tiles[shelf.itemsShown].focus();
-  expect(shelf.cursor).toBe(1);
+  tiles[shelf.windowItems].focus();
+  expect(shelf.windowOffset).toBe(1);
 });
